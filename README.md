@@ -46,7 +46,10 @@ sudo systemctl restart apache2
 ## Verification:
 apachectl -M | grep security
 
-## Step 3: Configure OWASP Core Rule Set (CRS)
+## Step 3: Download OWASP CRS
+sudo apt install modsecurity-crs -y
+
+## Step 4: Configure OWASP Core Rule Set (CRS)
 Configured ModSecurity to use OWASP CRS.
 
 sudo cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
@@ -57,7 +60,7 @@ sudo systemctl restart apache2
 Apache starts without errors
 CRS rules load successfully
 
-## Step 4: Deploy OWASP Juice Shop
+## Step 5: Deploy OWASP Juice Shop
 Deployed OWASP Juice Shop using Docker.
 
 sudo docker run -d -p 3000:3000 --name juice-shop bkimminich/juice-shop
@@ -66,7 +69,7 @@ sudo docker run -d -p 3000:3000 --name juice-shop bkimminich/juice-shop
 Access Juice Shop at:
 http://localhost:3000
 
-## Step 5: Configure Apache as Reverse Proxy
+## Step 6: Configure Apache as Reverse Proxy
 Configured Apache to forward traffic to Juice Shop so WAF inspects requests.
 
 sudo a2enmod proxy proxy_http
@@ -76,7 +79,7 @@ sudo systemctl restart apache2
 Juice Shop accessible via Apache
 ModSecurity intercepts requests
 
-## Step 6: Perform Attack – XSS Example
+## Step 7: Perform Attack – XSS Example
 Tested Cross-Site Scripting attack.
 
 Payload Used:
@@ -87,7 +90,7 @@ Payload Used:
 Request blocked
 HTTP 403 Forbidden returned
 
-## Step 7: Log Analysis
+## Step 8: Log Analysis
 Analyzed ModSecurity audit logs.
 sudo tail -f /var/log/apache2/modsec_audit.log
 
