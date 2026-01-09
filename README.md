@@ -26,5 +26,4 @@ Detailed audit logs were generated and analyzed.
 ## 📸 Screenshots
 Screenshots of attack execution and WAF blocking are available in the screenshots folder.
 
-## 📄 Report
-A detailed project report is available in the `report/` directory.
+
