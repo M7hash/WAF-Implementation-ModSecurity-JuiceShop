@@ -24,7 +24,7 @@ All malicious requests were detected and blocked with HTTP 403 responses.
 Detailed audit logs were generated and analyzed.
 
 ## 📸 Screenshots
-Screenshots of attack execution and WAF blocking are available in the screenshots folder.
+Screenshots of attack execution and WAF blocking are available.
 
 ## Project Implementation Steps
 
