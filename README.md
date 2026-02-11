@@ -31,8 +31,8 @@ Screenshots of attack execution and WAF blocking are available.
 ## Step 1: Environment Setup
 Updated the system and installed required packages.
 
-'''sudo apt update'''
-sudo apt install apache2 libapache2-mod-security2 docker.io -y
+''' sudo apt update
+sudo apt install apache2 libapache2-mod-security2 docker.io -y '''
 
 ## Verification:
 sudo systemctl status apache2
