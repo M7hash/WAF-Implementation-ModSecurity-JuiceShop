@@ -36,46 +36,49 @@ sudo apt install apache2 libapache2-mod-security2 docker.io -y
 ```
 
 ## Verification:
+```bash
 sudo systemctl status apache2
-
+```
 ## Step 2: Enable ModSecurity
 Enabled ModSecurity module in Apache.
-
+```bash
 sudo a2enmod security2
 sudo systemctl restart apache2
-
+```
 ## Verification:
+```bash
 apachectl -M | grep security
-
+```
 ## Step 3: Download OWASP CRS
+```bash
 sudo apt install modsecurity-crs -y
-
+```
 ## Step 4: Configure OWASP Core Rule Set (CRS)
 Configured ModSecurity to use OWASP CRS.
-
+```bash
 sudo cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
 sudo sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/' /etc/modsecurity/modsecurity.conf
 sudo systemctl restart apache2
-
+```
 ## Verification:
 Apache starts without errors
 CRS rules load successfully
 
 ## Step 5: Deploy OWASP Juice Shop
 Deployed OWASP Juice Shop using Docker.
-
+```bash
 sudo docker run -d -p 3000:3000 --name juice-shop bkimminich/juice-shop
-
+```
 ## Verification:
 Access Juice Shop at:
 http://localhost:3000
 
 ## Step 6: Configure Apache as Reverse Proxy
 Configured Apache to forward traffic to Juice Shop so WAF inspects requests.
-
+```bash
 sudo a2enmod proxy proxy_http
 sudo systemctl restart apache2
-
+```
 ## Verification:
 Juice Shop accessible via Apache
 ModSecurity intercepts requests
@@ -84,8 +87,9 @@ ModSecurity intercepts requests
 Tested Cross-Site Scripting attack.
 
 Payload Used:
+```bash
 <script>alert(1)</script>
-
+```
 
 ## Result:
 Request blocked
@@ -93,5 +97,6 @@ HTTP 403 Forbidden returned
 
 ## Step 8: Log Analysis
 Analyzed ModSecurity audit logs.
+```bash
 sudo tail -f /var/log/apache2/modsec_audit.log
-
+```
